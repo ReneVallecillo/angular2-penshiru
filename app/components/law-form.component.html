@@ -1,15 +1,62 @@
 
-<div class="container">
+
+<div class="container" [hidden]=submitted>
     <h1>Law Form</h1>
-    <form>
+    <form (ngSubmit)="onSubmit()" #lawForm="ngForm">
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" required>
+        <input type="text" class="form-control" required 
+        [(ngModel)] = "model.name"
+        ngControl = "name" #name="ngForm">
+        <div [hidden]="name.valid" class="alert alert-danger">
+            name is required
+        </div>
+
       </div>
       <div class="form-group">
-        <label for="alterEgo">Alter Ego</label>
-        <input type="text" class="form-control">
+        <label for="lawNumber">Law Number</label>
+        <input type="text" class="form-control" required
+        [(ngModel)] = "model.lawNumber"
+        ngControl = "lawNumber">
       </div>
-      <button type="submit" class="btn btn-default">Submit</button>
+      <div class="form-group">
+        <label for="publishDate">Publish Date</label>
+        <input type="text" class="form-control" required
+        [(ngModel)] = "model.publishDate"
+        ngControl = "publishDate">
+      </div>
+      
+      <div class="form-group">
+        <label for="cat">Law Category</label>
+        <select class="form-control" required
+        [(ngModel)] = "model.cat"
+        ngControl = "cat">
+            <option *ngFor="#c of cats" [value]="c">{{c}}</option>
+        </select>
+        </div>
+      <button type="submit" class="btn btn-default"
+      [disabled]="!lawForm.form.valid">Submit</button>
     </form>
+</div>
+
+<div class="container" [hidden]="!submitted">
+  <h2>You submitted the following:</h2>
+  <div class="row">
+    <div class="col-xs-3">Name</div>
+    <div class="col-xs-9  pull-left">{{ model.name }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Law Number</div>
+    <div class="col-xs-9 pull-left">{{ model.lawNumber }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Publish Date</div>
+    <div class="col-xs-9 pull-left">{{ model.publishDate }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Category</div>
+    <div class="col-xs-9 pull-left">{{ model.cat }}</div>
+  </div>
+  <br>
+  <button class="btn btn-default" (click)="submitted=false">Edit</button>
 </div>

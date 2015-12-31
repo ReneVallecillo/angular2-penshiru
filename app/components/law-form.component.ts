@@ -12,7 +12,7 @@ export class LawFormComponent {
 	cats = ['Civiles', 'Penales', 'Mercantiles', 'Tributarias'];
 	
 	model = new Law(23,822,"Ley de Concertacion Tributaria",'12/17/2012', 
-	this.cats[4]);
+	this.cats[3]);
 	
 	submitted = false;
 	
